@@ -3,10 +3,10 @@ import { useNavigation } from '@react-navigation/native'
 import {
   View,
   Text,
+  Image,
   TextInput,
   FlatList,
   TouchableOpacity,
-  KeyboardAvoidingView
 } from 'react-native'
 
 import api from '../../services/api'
@@ -46,8 +46,31 @@ export default function Job() {
     loadTechs(tech)
   }
 
+  function showKey(e) {
+    if(e.nativeEvent.key == 'Enter') {
+      console.log('isso')
+    }
+  }
+
   return (
     <View style={styles.container}>
+
+      <View style={styles.seachContainer}>
+        <TextInput 
+          style={styles.searchInput}
+          value={tech}
+          onChangeText={setTech}
+          placeholder="Buscar por Tech..."
+          placeholderTextColor="#999"
+          autoCapitalize="words"
+          onSubmitEditing={handleSearch} 
+          autoCorrect={false}
+        />
+
+        <TouchableOpacity onPress={handleSearch} style={styles.searchButton}>
+          <MaterialIcons name="search" size={20} color="#333" />
+        </TouchableOpacity>
+      </View>
 
       <FlatList 
         data={techList}
@@ -56,22 +79,24 @@ export default function Job() {
         showsVerticalScrollIndicator={false}
         renderItem={({ item: job }) => (
           <View style={styles.job}>
-            <Text style={styles.jobHeader}>{job.title}</Text>
+            <Text style={styles.jobTitle}>{job.title}</Text>
             
             <View style={styles.jobBody}>
               <View style={styles.jobBodyLeft}>
-                <Text style={styles.jobTitle}>MODALIDADE:</Text>
-                <Text style={styles.jobValue}>{job.type}</Text>
+                <Text style={styles.jobBodyTitle}>MODALIDADE:</Text>
+                <Text style={styles.jobBodyValue}>{job.type}</Text>
 
-                <Text style={styles.jobTitle}>LOCAL:</Text>
-                <Text style={styles.jobValue}>{job.location}</Text>
+                <Text style={styles.jobBodyTitle}>LOCAL:</Text>
+                <Text style={styles.jobBodyValue}>{job.location}</Text>
               </View>
               <View style={styles.jobBodyRight}>
-                <Text style={styles.jobTitle}>EMPRESA:</Text>
-                <Text style={styles.jobValue}>{job.company}</Text>
-
-                <Text style={styles.jobTitle}>SALARIO:</Text>
-                <Text style={styles.jobValue}>R$ 2500,00</Text>
+                <Text style={styles.jobBodyTitle}>EMPRESA:</Text>
+                <Image source={{ uri: job.company_logo }} style={{ 
+                  height: 50, 
+                  width: 60, 
+                  resizeMode: 'contain' ,
+                  marginTop: 5
+                }} />
               </View>
             </View>
 
@@ -80,32 +105,11 @@ export default function Job() {
               style={styles.jobButton}
             >
               <Text style={styles.jobButtonText}>Ver Mais</Text>
+              <MaterialIcons name="arrow-forward" size={20} color="#1976d2" />
             </TouchableOpacity>
           </View>
         )}
       />
-
-      <KeyboardAvoidingView
-        behavior="padding"
-        enabled
-        style={styles.formTech}
-      >
-        <View style={styles.seachContainer}>
-          <TextInput 
-            style={styles.searchInput}
-            value={tech}
-            onChangeText={setTech}
-            placeholder="Buscar por Tech..."
-            placeholderTextColor="#999"
-            autoCapitalize="words"
-            autoCorrect={false}
-          />
-
-          <TouchableOpacity onPress={handleSearch} style={styles.searchButton}>
-            <MaterialIcons name="search" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
-      </KeyboardAvoidingView>
     </View>
   )
 }

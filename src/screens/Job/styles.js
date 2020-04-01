@@ -3,9 +3,9 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    position: 'relative',
-    backgroundColor: '#f5f5f5'
+    paddingHorizontal: 20,
+    paddingTop: 10,
+    backgroundColor: '#f9f9fd'
   },
 
   job: {
@@ -15,10 +15,11 @@ const styles = StyleSheet.create({
     borderRadius: 4
   },
 
-  jobHeader: {
-    fontSize: 16,
+  jobTitle: {
+    fontSize: 14,
     textTransform: 'uppercase',
     fontWeight: 'bold',
+    marginBottom: 4,
     color: '#333'
   },
 
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
   },
 
   jobBodyLeft: {
-    flex: 1
+    flex: 2
   },
 
   jobBodyRight: {
@@ -35,59 +36,37 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
 
-  jobTitle: {
-    fontSize: 12,
-    color: '#777',
-    marginTop: 10
+  jobBodyTitle: {
+    fontSize: 10,
+    color: '#707079',
+    marginTop: 6
   },
 
-  jobValue: {
+  jobBodyValue: {
     fontSize: 14,
     fontWeight: 'bold',
     color: '#333'
   },
 
   jobButton: {
-    height: 50,
-    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 16,
-    borderRadius: 4,
-    backgroundColor: '#24292eee'
+    marginTop: 10,
   },
 
   jobButtonText: {
     fontSize: 14,
-    textTransform: 'uppercase',
     fontWeight: 'bold',
-    color: '#fff'
-  },
-
-  formTech: {
-    position: 'absolute',
-    bottom: -55,
-    left: 20,
-    right: 20,
-    zIndex: 5
+    color: '#1976d2'
   },
 
   seachContainer: {
     flexDirection: 'row',
-    marginBottom: 10,
-    backgroundColor: '#f5f5f5',
-    paddingBottom: 70,
-    paddingTop: 5
-  },
-
-  searchInput: {
-    flex: 1,
-    marginRight: 10,
-    height: 50,
     backgroundColor: '#fff',
-    color: '#333',
-    fontSize: 16,
-    borderRadius: 25,
+    marginBottom: 10,
     paddingHorizontal: 20,
+    borderRadius: 4,
     shadowColor: '#000',
     shadowOpacity: 0.2,
     shadowOffset: {
@@ -97,11 +76,16 @@ const styles = StyleSheet.create({
     elevation: 2
   },
 
+  searchInput: {
+    flex: 1,
+    marginRight: 10,
+    height: 40,
+    color: '#333',
+    fontSize: 14,
+  },
+
   searchButton: {
-    height: 50,
-    width: 50,
-    borderRadius: 25,
-    backgroundColor: '#24292e',
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center'
   }
