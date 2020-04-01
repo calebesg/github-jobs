@@ -4,7 +4,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    position: 'relative'
+    position: 'relative',
+    backgroundColor: '#f5f5f5'
   },
 
   job: {
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 16,
     borderRadius: 4,
-    backgroundColor: '#24292e'
+    backgroundColor: '#24292eee'
   },
 
   jobButtonText: {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
 
   formTech: {
     position: 'absolute',
-    bottom: -50,
+    bottom: -55,
     left: 20,
     right: 20,
     zIndex: 5
@@ -73,7 +74,9 @@ const styles = StyleSheet.create({
   seachContainer: {
     flexDirection: 'row',
     marginBottom: 10,
-    paddingBottom: 70
+    backgroundColor: '#f5f5f5',
+    paddingBottom: 70,
+    paddingTop: 5
   },
 
   searchInput: {
