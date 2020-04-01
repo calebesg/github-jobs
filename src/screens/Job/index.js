@@ -8,19 +8,24 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native'
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
 import api from '../../services/api'
 
 import styles from './styles'
 import { MaterialIcons } from '@expo/vector-icons'
 
+import Loading from '../../components/Loading'
+
 export default function Job() {
   const [tech, setTech] = useState('')
   const [techList, setTechList] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const navigation = useNavigation()
 
   async function loadTechs(search = '') {
+    setLoading(false)
       
     try {
       const response = await api.get(`?search=${search}`)
@@ -31,6 +36,8 @@ export default function Job() {
     } catch (err) {
       console.log('Falha na requisição')
     }
+
+    setLoading(true)
   }
 
   useEffect(() => {
@@ -42,14 +49,7 @@ export default function Job() {
   }
 
   function handleSearch() {
-
     loadTechs(tech)
-  }
-
-  function showKey(e) {
-    if(e.nativeEvent.key == 'Enter') {
-      console.log('isso')
-    }
   }
 
   return (
@@ -72,44 +72,55 @@ export default function Job() {
         </TouchableOpacity>
       </View>
 
-      <FlatList 
-        data={techList}
-        style={styles.listJobs}
-        keyExtractor={job => String(job.id)}
-        showsVerticalScrollIndicator={false}
-        renderItem={({ item: job }) => (
-          <View style={styles.job}>
-            <Text style={styles.jobTitle}>{job.title}</Text>
+      <Loading loading={loading} />
+
+      <ShimmerPlaceHolder
+        style={{height:0}}
+        autoRun={true}
+        visible={loading}
+      >
+        <FlatList 
+          data={techList}
+          style={styles.listJobs}
+          keyExtractor={job => String(job.id)}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item: job }) => (
+          
+
+              <View style={styles.job}>
+                <Text style={styles.jobTitle}>{job.title}</Text>
+                
+                <View style={styles.jobBody}>
+                  <View style={styles.jobBodyLeft}>
+                    <Text style={styles.jobBodyTitle}>MODALIDADE:</Text>
+                    <Text style={styles.jobBodyValue}>{job.type}</Text>
+
+                    <Text style={styles.jobBodyTitle}>LOCAL:</Text>
+                    <Text style={styles.jobBodyValue}>{job.location}</Text>
+                  </View>
+                  <View style={styles.jobBodyRight}>
+                    <Text style={styles.jobBodyTitle}>EMPRESA:</Text>
+                    <Image source={{ uri: job.company_logo }} style={{ 
+                      height: 50, 
+                      width: 60, 
+                      resizeMode: 'contain' ,
+                      marginTop: 5
+                    }} />
+                  </View>
+                </View>
+
+                <TouchableOpacity 
+                  onPress={() => navigateToDetail(job.url)} 
+                  style={styles.jobButton}
+                >
+                  <Text style={styles.jobButtonText}>Ver Mais</Text>
+                  <MaterialIcons name="arrow-forward" size={20} color="#1976d2" />
+                </TouchableOpacity>
             
-            <View style={styles.jobBody}>
-              <View style={styles.jobBodyLeft}>
-                <Text style={styles.jobBodyTitle}>MODALIDADE:</Text>
-                <Text style={styles.jobBodyValue}>{job.type}</Text>
-
-                <Text style={styles.jobBodyTitle}>LOCAL:</Text>
-                <Text style={styles.jobBodyValue}>{job.location}</Text>
-              </View>
-              <View style={styles.jobBodyRight}>
-                <Text style={styles.jobBodyTitle}>EMPRESA:</Text>
-                <Image source={{ uri: job.company_logo }} style={{ 
-                  height: 50, 
-                  width: 60, 
-                  resizeMode: 'contain' ,
-                  marginTop: 5
-                }} />
-              </View>
             </View>
-
-            <TouchableOpacity 
-              onPress={() => navigateToDetail(job.url)} 
-              style={styles.jobButton}
-            >
-              <Text style={styles.jobButtonText}>Ver Mais</Text>
-              <MaterialIcons name="arrow-forward" size={20} color="#1976d2" />
-            </TouchableOpacity>
-          </View>
-        )}
-      />
+          )}
+        />
+      </ShimmerPlaceHolder>
     </View>
   )
 }
