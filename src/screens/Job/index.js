@@ -1,41 +1,42 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigation } from '@react-navigation/native'
-import {
-  View,
-  Text,
-  Image,
-  TextInput,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native'
+import { View, Text, Image, TextInput, FlatList, TouchableOpacity } from 'react-native'
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
-
+import { MaterialIcons } from '@expo/vector-icons'
 import api from '../../services/api'
 
 import styles from './styles'
-import { MaterialIcons } from '@expo/vector-icons'
 
-import Loading from '../../components/Loading'
+import Load from '../../components/Load'
 
-export default function Job() {
+function Job() {
   const [tech, setTech] = useState('')
   const [techList, setTechList] = useState([])
   const [loading, setLoading] = useState(false)
 
+  const [page, setPage] = useState(1)
+
   const navigation = useNavigation()
 
-  async function loadTechs(search = '') {
+  async function loadTechs() {
+    
+    if (page > 2) {
+      return
+    }
+    
     setLoading(false)
       
     try {
-      const response = await api.get(`?search=${search}`)
+      const response = await api.get(`?page=${page}&search=${tech}`)
       
-      setTechList(response.data)
+      setTechList([...techList, ...response.data])
       setTech('')
 
     } catch (err) {
       console.log('Falha na requisição')
     }
+
+    setPage(page + 1)
 
     setLoading(true)
   }
@@ -49,7 +50,7 @@ export default function Job() {
   }
 
   function handleSearch() {
-    loadTechs(tech)
+    loadTechs()
   }
 
   return (
@@ -72,10 +73,10 @@ export default function Job() {
         </TouchableOpacity>
       </View>
 
-      <Loading loading={loading} />
-      <Loading loading={loading} />
-      <Loading loading={loading} />
-      <Loading loading={loading} />
+      <Load loading={loading} />
+      <Load loading={loading} />
+      <Load loading={loading} />
+      <Load loading={loading} />
      
       <ShimmerPlaceHolder
         style={{height:0}}
@@ -87,6 +88,8 @@ export default function Job() {
           style={styles.listJobs}
           keyExtractor={job => String(job.id)}
           showsVerticalScrollIndicator={false}
+          onEndReached={loadTechs}
+          onEndReachedThreshold={0.2}
           renderItem={({ item: job }) => (
 
             <View style={styles.job}>
@@ -126,3 +129,5 @@ export default function Job() {
     </View>
   )
 }
+
+export default Job

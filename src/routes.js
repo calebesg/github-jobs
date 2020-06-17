@@ -14,11 +14,14 @@ export default function Routes() {
       <AppStack.Navigator 
         screenOptions={{
           headerStyle: {
-            backgroundColor: '#24292e'
+            backgroundColor: '#2B7FC3'
           },
           headerTintColor: '#fff',
           headerTitleStyle: {
             fontWeight: 'bold'
+          },
+          cardStyle: {
+            backgroundColor: '#F0F0F5'
           }
         }} 
       >

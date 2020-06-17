@@ -1,8 +1,8 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder'
 
-export default function Loading({ loading }) {
+function Load({ loading }) {
   return (
     <ShimmerPlaceHolder style={{height: 0}} visible={!loading} autoRun={true}>
       <View style={styles.container}>
@@ -32,7 +32,7 @@ export default function Loading({ loading }) {
         />
       </View>
     </ShimmerPlaceHolder>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -71,4 +71,6 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 10
   }
-});
+})
+
+export default Load
