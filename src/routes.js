@@ -7,7 +7,7 @@ const AppStack = createStackNavigator()
 import Job from './screens/Job'
 import Detail from './screens/Detail'
 
-export default function Routes() {
+function Routes() {
   return (
     <NavigationContainer>
 
@@ -26,17 +26,13 @@ export default function Routes() {
         }} 
       >
         <AppStack.Screen
-          options={{
-            title: 'Github Jobs'
-          }} 
+          options={{ title: 'Github Jobs' }} 
           name="Job" 
           component={Job} 
         />
 
         <AppStack.Screen
-          options={{
-            title: 'Descrição do Job'
-          }} 
+          options={{ title: 'Descrição do Job' }}
           name="Detail" 
           component={Detail} 
         />
@@ -45,3 +41,5 @@ export default function Routes() {
     </NavigationContainer>
   )
 }
+
+export default Routes
