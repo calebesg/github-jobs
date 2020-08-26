@@ -1,7 +1,7 @@
-import React from 'react'
-import { StatusBar } from 'react-native'
+import React from 'react';
+import { StatusBar } from 'react-native';
 
-import Routes from './src/routes'
+import Routes from './src/routes';
 
 function App() {
   return (
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

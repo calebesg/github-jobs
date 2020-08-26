@@ -1,11 +1,11 @@
-import React from 'react'
-import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-const AppStack = createStackNavigator()
+const AppStack = createStackNavigator();
 
-import Job from './screens/Job'
-import Detail from './screens/Detail'
+import Main from './screens/Main';
+import Detail from './screens/Detail';
 
 function Routes() {
   return (
@@ -27,8 +27,8 @@ function Routes() {
       >
         <AppStack.Screen
           options={{ title: 'Github Jobs' }} 
-          name="Job" 
-          component={Job} 
+          name="Main" 
+          component={Main} 
         />
 
         <AppStack.Screen
@@ -39,7 +39,7 @@ function Routes() {
       </AppStack.Navigator>
 
     </NavigationContainer>
-  )
+  );
 }
 
-export default Routes
+export default Routes;
