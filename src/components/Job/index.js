@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { RectButton } from 'react-native-gesture-handler';
 import { View, Text, Image } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import heartOutilineIcon from '../../assets/images/icons/heart-outline.png';
 import unfavoriteIcon from '../../assets/images/icons/unfavorite.png';
@@ -15,6 +16,33 @@ function Job({ job, favorited }) {
   
   function navigateToDetail(url) {
     navigation.navigate('Detail', {uri: url});
+  }
+
+  async function handleToggleFavorite() {
+    const favorites = await AsyncStorage.getItem('favorites');
+
+    let favoriteArray = [];
+
+    if (favorites) {
+      favoriteArray = JSON.parse(favorites);
+    }
+
+    if (isFavorited) {
+      const favoriteIndex = favoriteArray.findIndex(jobItem => {
+        return jobItem.id === job.id;
+      });
+
+      favoriteArray.splice(favoriteIndex, 1);
+
+      setIsFavorited(false);
+    } else {
+
+      favoriteArray.push(job);
+
+      setIsFavorited(true);
+    }
+
+    await AsyncStorage.setItem('favorites', JSON.stringify(favoriteArray));
   }
 
   return (
@@ -32,7 +60,7 @@ function Job({ job, favorited }) {
 
         <View style={styles.buttonsContainer}>
           <RectButton 
-            onPress={() => {}}
+            onPress={handleToggleFavorite}
             style={[
               styles.favoriteButton, 
               isFavorited ? styles.favorited : {}

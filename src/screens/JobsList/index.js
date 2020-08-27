@@ -12,46 +12,54 @@ import Job from '../../components/Job';
 
 import styles from './styles';
 
-function Main() {
-  const [techList, setTechList] = useState([]);
+function JobsList() {
+  const [jobs, setJobs] = useState([]);
   const [search, setSearch] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
-  async function loadTechs() {
+  useEffect(() => {
+    async function loadJobs() {
     
-    setLoading(true);
+      setLoading(true);
+        
+      const response = await api.get(`?page=0`);
       
-    const response = await api.get(`?description=${search}&page=0`);
-    
-    setTechList(response.data);
+      setJobs(response.data);
+  
+      setLoading(false);
+    }
 
-    setLoading(false);
-  }
-
-  useEffect(() => {loadTechs()}, []);
+    loadJobs();
+  }, []);
 
   function handleToggleFiltersVisible() {
     setIsFiltersVisible(!isFiltersVisible);
   }
 
-  async function handleFiltersSubmit() {
-    /*
-    loadFavorites();
+  function onChangeSearch(text) {
+    const textLower = text.toLowerCase();
 
-    const response = await api.get('classes', {
-      params: {
-        subject,
-        week_day,
-        time
-      }
-    });
+    setSearch(textLower);
+  }
+
+  async function handleFiltersSubmit() {
+    //loadFavorites();
+    if (!search) {
+      return;
+    }
+
+    setLoading(true);
+
+    const response = await api.get(`?description=${search}`);
 
     setIsFiltersVisible(false);
+    setSearch('');
 
-    setTeachers(response.data);
-    */
+    setJobs(response.data);
+
+    setLoading(false);
   }
 
   return (
@@ -71,8 +79,9 @@ function Main() {
               style={styles.input}
               placeholder="Qual a tecnologia?"
               placeholderTextColor="#c1bccc"
+              autoCorrect={false}
               value={search}
-              onChangeText={text => setSearch(text)}
+              onChangeText={text => onChangeSearch(text)}
             />
 
             <RectButton 
@@ -96,7 +105,7 @@ function Main() {
           visible={!loading}
         >
           <FlatList 
-            data={techList}
+            data={jobs}
             style={styles.listJobs}
             keyExtractor={job => String(job.id)}
             showsVerticalScrollIndicator={false}
@@ -113,4 +122,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default JobsList;
