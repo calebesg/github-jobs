@@ -3,37 +3,42 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 10
+    paddingHorizontal: 30,
+    marginTop: -40
   },
 
-  seachContainer: {
+  searchForm: {
+    marginBottom: 24
+  },
+
+  label: {
+    color: '#d4c2ff',
+    fontFamily: 'Poppins_400Regular'
+  },
+
+  input: {
+    height: 54,
+    backgroundColor: '#FFF',
+    borderRadius: 8,
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    marginTop: 4,
+    marginBottom: 16
+  },
+
+  submitButton: {
+    backgroundColor: '#04d361',
+    height: 56,
+    borderRadius: 8,
     flexDirection: 'row',
-    backgroundColor: '#fff',
-    marginBottom: 10,
-    paddingHorizontal: 20,
-    borderRadius: 4,
-    shadowColor: '#000',
-    shadowOpacity: 0.2,
-    shadowOffset: {
-      width: 4,
-      height: 4
-    },
-    elevation: 2
-  },
-
-  searchInput: {
-    flex: 1,
-    marginRight: 10,
-    height: 40,
-    color: '#333',
-    fontSize: 14,
-  },
-
-  searchButton: {
-    height: 40,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  submitButtonText: {
+    color: '#FFF',
+    fontFamily: 'Archivo_700Bold',
+    fontSize: 16
   }
 });
 

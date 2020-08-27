@@ -1,10 +1,17 @@
-import React from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { RectButton } from 'react-native-gesture-handler';
+import { View, Text, Image } from 'react-native';
+
+import heartOutilineIcon from '../../assets/images/icons/heart-outline.png';
+import unfavoriteIcon from '../../assets/images/icons/unfavorite.png';
 
 import styles from './styles';
 
-function Job({ job }) {
+function Job({ job, favorited }) {
+  const [isFavorited, setIsFavorited] = useState(favorited);
+
+  const navigation = useNavigation();
   
   function navigateToDetail(url) {
     navigation.navigate('Detail', {uri: url});
@@ -14,33 +21,37 @@ function Job({ job }) {
     <View style={styles.job}>
       <Text style={styles.jobTitle}>{job.title}</Text>
       
-      <View style={styles.jobBody}>
-        <View style={styles.jobBodyLeft}>
-          <Text style={styles.jobBodyTitle}>MODALIDADE:</Text>
-          <Text style={styles.jobBodyValue}>{job.type}</Text>
-
-          <Text style={styles.jobBodyTitle}>LOCAL:</Text>
-          <Text style={styles.jobBodyValue}>{job.location}</Text>
-        </View>
-        <View style={styles.jobBodyRight}>
-          <Text style={styles.jobBodyTitle}>EMPRESA:</Text>
-          <Image source={{ uri: job.company_logo }} style={{ 
-            height: 50, 
-            width: 60, 
-            resizeMode: 'contain',
-            marginTop: 5
-          }} />
-        </View>
+      
+      <View style={styles.content}>
+        <Text style={styles.contentTextCompany}>{job.company}</Text>
+        <Text style={styles.contentTextLocation}>{job.location}</Text>
       </View>
 
-      <TouchableOpacity 
-        onPress={() => navigateToDetail(job.url)} 
-        style={styles.jobButton}
-      >
-        <Text style={styles.jobButtonText}>Ver Mais</Text>
-        <MaterialIcons name="arrow-forward" size={20} color="#1976d2" />
-      </TouchableOpacity>
-  
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>{job.type}</Text>
+
+        <View style={styles.buttonsContainer}>
+          <RectButton 
+            onPress={() => {}}
+            style={[
+              styles.favoriteButton, 
+              isFavorited ? styles.favorited : {}
+            ]}
+          >
+            { isFavorited
+              ? <Image source={unfavoriteIcon} />
+              : <Image source={heartOutilineIcon} />
+            }
+            
+          </RectButton>
+          <RectButton
+            onPress={() => navigateToDetail(job.url)}
+            style={styles.moreButton}
+          >
+            <Text style={styles.moreButtonText}>Ver mais</Text>
+          </RectButton>
+        </View>
+      </View>
     </View>
   );
 }
