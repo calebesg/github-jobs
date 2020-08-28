@@ -1,45 +1,50 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
+  content: {
     flex: 1,
     paddingHorizontal: 30,
-    marginTop: -40
+    backgroundColor: '#050505',
+  },
+
+  container: {
+    marginTop: -40,
   },
 
   searchForm: {
-    marginBottom: 24
+    marginBottom: 24,
   },
 
   label: {
-    color: '#d4c2ff',
-    fontFamily: 'Poppins_400Regular'
+    color: '#686870',
+    fontFamily: 'Poppins_400Regular',
   },
 
   input: {
     height: 54,
-    backgroundColor: '#FFF',
+    backgroundColor: '#201F24',
     borderRadius: 8,
     justifyContent: 'center',
     paddingHorizontal: 16,
     marginTop: 4,
-    marginBottom: 16
+    marginBottom: 16,
+    color: '#fff',
   },
 
   submitButton: {
-    backgroundColor: '#04d361',
+    backgroundColor: '#373A41',
     height: 56,
     borderRadius: 8,
     flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   submitButtonText: {
     color: '#FFF',
     fontFamily: 'Archivo_700Bold',
-    fontSize: 16
-  }
+    fontSize: 16,
+  },
 });
 
 export default styles;

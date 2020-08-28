@@ -9,7 +9,7 @@ import unfavoriteIcon from '../../assets/images/icons/unfavorite.png';
 
 import styles from './styles';
 
-function Job({ job, favorited }) {
+function Job({ job, updateFavoritesList, favorited }) {
   const [isFavorited, setIsFavorited] = useState(favorited);
 
   const navigation = useNavigation();
@@ -33,7 +33,7 @@ function Job({ job, favorited }) {
       });
 
       favoriteArray.splice(favoriteIndex, 1);
-
+      
       setIsFavorited(false);
     } else {
 
@@ -43,6 +43,8 @@ function Job({ job, favorited }) {
     }
 
     await AsyncStorage.setItem('favorites', JSON.stringify(favoriteArray));
+
+    updateFavoritesList();
   }
 
   return (

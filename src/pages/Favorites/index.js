@@ -35,6 +35,10 @@ function Favorites() {
     }, [])
   );
 
+  function updateFavoritesList() {
+    loadFavorites();
+  }
+
   return (
     <>
       <PageHeader title="Meus Favoritos" />
@@ -58,7 +62,8 @@ function Favorites() {
               return (
                 <Job
                   key={job.id}
-                  job={job} 
+                  job={job}
+                  updateFavoritesList={updateFavoritesList}
                   favorited
                 />
               );

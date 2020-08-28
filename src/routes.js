@@ -3,8 +3,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Feather } from '@expo/vector-icons';
 
-import JobsList from './screens/JobsList';
-import Favorites from './screens/Favorites';
+import JobsList from './pages/JobsList';
+import Favorites from './pages/Favorites';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -17,32 +17,33 @@ function Routes() {
           style: {
             elevation: 0,
             shadownOpacity: 0,
-            height: 64
+            height: 64,
           },
   
           tabStyle: {
-            height: 64,
+            marginTop: -1,
             flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
           },
   
           iconStyle: {
             flex: 0,
             width: 20,
-            height: 20
+            height: 20,
           },
   
           labelStyle: {
             fontFamily: 'Archivo_700Bold',
             fontSize: 13,
-            marginLeft: 16
+            marginLeft: 16,
           },
   
-          inactiveBackgroundColor: '#fafafc',
-          activeBackgroundColor: '#ebebf5',
-          inactiveTintColor: '#c1bccc',
-          activeTintColor: '#32264d'
+          inactiveBackgroundColor: '#17181C',
+          activeBackgroundColor: '#17181C',
+          inactiveTintColor: '#686870',
+          activeTintColor: '#0C6CDE',
+          
         }}
       >
         <Screen 
@@ -53,7 +54,7 @@ function Routes() {
               return (
                 <Feather 
                   name="home" 
-                  color={focused ? '#8257E5' : color} 
+                  color={focused ? '#0C6CDE' : color} 
                   size={size} 
                 />
               );
@@ -68,7 +69,7 @@ function Routes() {
               return (
                 <Feather 
                   name="heart" 
-                  color={focused ? '#8257E5' : color} 
+                  color={focused ? '#0C6CDE' : color} 
                   size={size} 
                 />
               );

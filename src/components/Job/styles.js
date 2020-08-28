@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   job: {
-    backgroundColor: '#fff',
+    backgroundColor: '#201F24',
     marginBottom: 20,
     borderRadius: 8,
     overflow: 'hidden'
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginHorizontal: 18,
     marginTop: 18,
-    color: '#32264d'
+    color: '#FFF'
   },
 
   content: {
@@ -23,25 +23,25 @@ const styles = StyleSheet.create({
   contentTextCompany: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 14,
-    color: '#6a6180'
+    color: '#AEAFB4'
   },
 
   contentTextLocation: {
     fontFamily: 'Poppins_600SemiBold',
     fontSize: 12,
-    color: '#6a6180',
+    color: '#686870',
     marginTop: 8
   },
 
   footer: {
-    backgroundColor: '#fafafc',
+    backgroundColor: '#201F24',
     padding: 18
   },
 
   footerText: {
     fontFamily: 'Poppins_400Regular',
     fontSize: 12,
-    color: '#6a6180',
+    color: '#686870',
     marginBottom: 8
   },
 
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 
   favoriteButton: {
-    backgroundColor: '#8257e5',
+    backgroundColor: '#2F8EFF',
     width: 46,
     height: 46,
     borderRadius: 8,
@@ -60,11 +60,11 @@ const styles = StyleSheet.create({
   },
 
   favorited: {
-    backgroundColor: '#e33d3d'
+    backgroundColor: '#8F6BD6'
   },
 
   moreButton: {
-    backgroundColor: '#04d361',
+    backgroundColor: '#373A41',
     flex: 1,
     height: 46,
     borderRadius: 8,

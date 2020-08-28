@@ -1,6 +1,8 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
+
+import styles from './styles';
 
 function Load({ loading }) {
   return (
@@ -10,67 +12,29 @@ function Load({ loading }) {
           visible={loading} 
           style={styles.title} 
           autoRun={true}
-          colorShimmer={['#ebebef88', '#c5c5cf88', '#ebebef88']}
+          colorShimmer={['#373A41', '#25272b', '#373A41']}
         /> 
         <ShimmerPlaceHolder 
           visible={loading} 
           style={styles.longInfo} 
           autoRun={true}
-          colorShimmer={['#ebebef88', '#c5c5cf88', '#ebebef88']}
+          colorShimmer={['#373A41', '#25272b', '#373A41']}
         />
         <ShimmerPlaceHolder 
           visible={loading}
           style={styles.shortInfo} 
           autoRun={true}
-          colorShimmer={['#ebebef88', '#c5c5cf88', '#ebebef88']}
+          colorShimmer={['#373A41', '#25272b', '#373A41']}
         />
         <ShimmerPlaceHolder 
           visible={loading} 
           style={styles.buttom} 
           autoRun={true}
-          colorShimmer={['#ebebef88', '#c5c5cf88', '#ebebef88']}
+          colorShimmer={['#373A41', '#25272b', '#373A41']}
         />
       </View>
     </ShimmerPlaceHolder>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    width: '100%',
-    height: 'auto',
-    borderRadius: 4,
-    padding: 20,
-    marginBottom: 16
-  },
-
-  title: {
-    height: 15,
-    width: '100%',
-    borderRadius: 10,
-    marginBottom: 20
-  },
-
-  longInfo: {
-    height: 10,
-    width: '80%',
-    borderRadius: 10,
-    marginBottom: 16
-  },
-
-  shortInfo: {
-    height: 10,
-    width: 100,
-    borderRadius: 10,
-    marginBottom: 20
-  },
-
-  buttom: {
-    height: 15,
-    width: '100%',
-    borderRadius: 10
-  }
-});
 
 export default Load;

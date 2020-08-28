@@ -37,27 +37,29 @@ function JobsList() {
     setLoading(false);
   }
 
+  async function loadJobs() {
+    loadFavorites();
+    
+    setLoading(true);
+      
+    const response = await api.get(`?page=0`);
+    
+    setJobs(response.data);
+
+    setLoading(false);
+  }
+
   useFocusEffect(
     React.useCallback(() => {
       loadFavorites();
+
+      loadJobs();
     }, [])
   );
 
-  useEffect(() => {
-    async function loadJobs() {
-      loadFavorites();
-      
-      setLoading(true);
-        
-      const response = await api.get(`?page=0`);
-      
-      setJobs(response.data);
-  
-      setLoading(false);
-    }
-
-    loadJobs();
-  }, []);
+  function updateFavoritesList() {
+    loadFavorites();
+  }
 
   function handleToggleFiltersVisible() {
     setIsFiltersVisible(!isFiltersVisible);
@@ -103,7 +105,7 @@ function JobsList() {
             <TextInput 
               style={styles.input}
               placeholder="Qual a tecnologia?"
-              placeholderTextColor="#c1bccc"
+              placeholderTextColor="#686870"
               autoCorrect={false}
               value={search}
               onChangeText={text => onChangeSearch(text)}
@@ -120,31 +122,36 @@ function JobsList() {
 
       </PageHeader>
 
-      <View style={styles.container}>
+      <View style={styles.content}>
 
-        <Load loading={!loading} />
+        <View style={styles.container}>
+          <Load loading={!loading} />
       
-        <ShimmerPlaceHolder
-          style={{height:0}}
-          autoRun={true}
-          visible={!loading}
-        >
-          <FlatList 
-            data={jobs}
-            style={styles.listJobs}
-            keyExtractor={job => String(job.id)}
-            showsVerticalScrollIndicator={false}
-            onEndReachedThreshold={0.6}
-            renderItem={({ item: job }) => {
-              return (
-                <Job 
-                  job={job} 
-                  favorited={favorites.includes(job.id)}   
-                />
-              );
-            }}
-          />
-        </ShimmerPlaceHolder>
+          <ShimmerPlaceHolder
+            style={{height:0}}
+            autoRun={true}
+            visible={!loading}
+          >
+            <FlatList 
+              data={jobs}
+              style={styles.listJobs}
+              keyExtractor={job => String(job.id)}
+              showsVerticalScrollIndicator={false}
+              onEndReachedThreshold={0.6}
+              renderItem={({ item: job }) => {
+                return (
+                  <Job 
+                    job={job} 
+                    updateFavoritesList={() => {}}
+                    favorited={favorites.includes(job.id)}   
+                  />
+                );
+              }}
+            />
+          </ShimmerPlaceHolder>
+        </View>
+
+        
       </View>
     </>
   );
