@@ -1,6 +1,6 @@
 
 <h1 align="center">
-  <img src="https://user-images.githubusercontent.com/36782514/85234979-c14ba980-b3e7-11ea-806b-ebcaf766d3d1.png" alt="Logo Be The Hero" width="230">
+  <img src="https://user-images.githubusercontent.com/36782514/85234979-c14ba980-b3e7-11ea-806b-ebcaf766d3d1.png" alt="Logo Be The Hero" width="200">
 </h1>
 <br>
 
@@ -25,14 +25,14 @@
 <br>
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/36782514/85235370-ca8a4580-b3ea-11ea-877c-215f3e7a432a.gif" alt="demo" height="420">
+  <img src="https://user-images.githubusercontent.com/36782514/91621826-e79f3f80-e96a-11ea-86dd-570532610a89.png" alt="demo" height="420">
 </p>
 
 <hr />
 
 ## 🏷️ About
 
-Github job is a mobile application for job search, consuming the github public api.
+Github job is a mobile application for job search, consuming the github public api.Video DEMO avaible in [youtube](https://www.youtube.com/watch?v=PrVXBrvlzao)
 
 ## 💻 Technologies
 This app features all the latest tools and practices in mobile development!
