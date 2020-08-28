@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
 import { View, Text, TextInput, FlatList } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
-import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import { Feather } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-community/async-storage';
+import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 
 import api from '../../services/api';
 

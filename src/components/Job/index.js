@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Image, Linking } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { View, Text, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import heartOutilineIcon from '../../assets/images/icons/heart-outline.png';
@@ -11,13 +10,7 @@ import styles from './styles';
 
 function Job({ job, updateFavoritesList, favorited }) {
   const [isFavorited, setIsFavorited] = useState(favorited);
-
-  const navigation = useNavigation();
   
-  function navigateToDetail(url) {
-    navigation.navigate('Detail', {uri: url});
-  }
-
   async function handleToggleFavorite() {
     const favorites = await AsyncStorage.getItem('favorites');
 
@@ -75,7 +68,7 @@ function Job({ job, updateFavoritesList, favorited }) {
             
           </RectButton>
           <RectButton
-            onPress={() => navigateToDetail(job.url)}
+            onPress={() => Linking.openURL(job.url)}
             style={styles.moreButton}
           >
             <Text style={styles.moreButtonText}>Ver mais</Text>

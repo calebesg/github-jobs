@@ -6,13 +6,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     backgroundColor: '#17181C'
   },
-
-  topBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between'
-  },
-
+  
   header: {
     flexDirection: 'row',
     alignItems: 'center',
