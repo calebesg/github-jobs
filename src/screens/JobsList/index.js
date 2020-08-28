@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { View, Text, TextInput, FlatList } from 'react-native';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
@@ -14,14 +16,37 @@ import styles from './styles';
 
 function JobsList() {
   const [jobs, setJobs] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [search, setSearch] = useState('');
 
   const [loading, setLoading] = useState(true);
   const [isFiltersVisible, setIsFiltersVisible] = useState(false);
 
+  function loadFavorites() {
+    setLoading(true);
+
+    AsyncStorage.getItem('favorites').then(response => {
+      if (response) {
+        const favoritesJobs = JSON.parse(response);
+        const favoritesJobsIds = favoritesJobs.map(job => job.id);
+
+        setFavorites(favoritesJobsIds);
+      }
+    });
+
+    setLoading(false);
+  }
+
+  useFocusEffect(
+    React.useCallback(() => {
+      loadFavorites();
+    }, [])
+  );
+
   useEffect(() => {
     async function loadJobs() {
-    
+      loadFavorites();
+      
       setLoading(true);
         
       const response = await api.get(`?page=0`);
@@ -112,7 +137,10 @@ function JobsList() {
             onEndReachedThreshold={0.6}
             renderItem={({ item: job }) => {
               return (
-                <Job job={job} favorited={false} />
+                <Job 
+                  job={job} 
+                  favorited={favorites.includes(job.id)}   
+                />
               );
             }}
           />
